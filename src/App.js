@@ -11,7 +11,7 @@ function reducer(state, action) {
     case 'REQUEST_FINISHED':
       return {
         ...state,
-        joke: action.payload,
+        jokes: state.jokes.concat(action.payload),
         getNewJoke: false
       };
 
@@ -31,7 +31,7 @@ function reducer(state, action) {
 
 function App() {
 
-  const [data, dispatch] = useReducer(reducer, { joke: {}, getNewJoke: false, getAuto: false, intervalId: null });
+  const [data, dispatch] = useReducer(reducer, { jokes: [], getNewJoke: false, getAuto: false, intervalId: null });
 
   function getRandomInt(upperBound) {
     return Math.floor(Math.random() * upperBound);
@@ -92,10 +92,11 @@ function App() {
       </div>
       {/* following div needs to have a changing key for animation to start over on render */}
       <div key={Math.random()} className='jokeContainer'>
-        {Object.keys(data.joke).length > 0 && data.joke.value}
+        {data.jokes.length > 0 && data.jokes[data.jokes.length - 1].value}
       </div>
     </div>
   );
 }
 
 export default App;
+
