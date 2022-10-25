@@ -54,8 +54,8 @@ function App() {
           jokesData.push(newJoke);
           localStorage.setItem('jokesData', JSON.stringify(jokesData));
 
-        } catch {
-          console.log("Failed to retrieve a joke from api");
+        } catch (error) {
+          console.log(error.name, "Failed to retrieve a joke from api", );
           // get joke from local storage instead
           let jokesData = JSON.parse(localStorage.getItem('jokesData'));
           dispatch({ type: 'REQUEST_FINISHED', payload: jokesData[getRandomInt(jokesData.length)] });
@@ -78,7 +78,6 @@ function App() {
         payload: setInterval(() => dispatch({ type: 'GET_NEW_JOKE' }), 10000)
       })
     }
-
   }, [data.getAuto]);
 
 
