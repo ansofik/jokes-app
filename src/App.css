@@ -2,7 +2,6 @@
   from {
     color: black;
   }
-
   to {
     color: white;
   }
@@ -35,4 +34,10 @@ body {
   text-align: center;
   font-size: 30px;
   animation: changeBackgroundColor infinite 10s linear;
+}
+
+.info {
+  padding: 10px;
+  color: white;
+  font-size: 10px;
 }
