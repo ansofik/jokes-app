@@ -8,7 +8,7 @@ function reducer(state, action) {
     case 'GET_NEW_JOKE':
       return { ...state, getNewJoke: true };
 
-    case 'ADD_JOKE':
+    case 'UPDATE_DATA':
       return {
         ...state,
         jokes: state.jokes.concat(action.payload.joke),
@@ -42,7 +42,7 @@ function App() {
         try {
           let result = await axios('https://api.chucknorris.io/jokes/random');
           let newJoke = { value: result.data.value, id: result.data.id };
-          dispatch({ type: 'ADD_JOKE', payload: {joke: newJoke, failed: false }});
+          dispatch({ type: 'UPDATE_DATA', payload: {joke: newJoke, failed: false }});
 
           // save joke to local storage
           let jokesData = JSON.parse(localStorage.getItem('jokesData'));
@@ -59,7 +59,7 @@ function App() {
           // get joke from local storage instead
           let jokesData = JSON.parse(localStorage.getItem('jokesData'));
           if (jokesData !== null) {
-            dispatch({ type: 'ADD_JOKE', payload: {joke: jokesData[getRandomInt(jokesData.length)], failed: true }});
+            dispatch({ type: 'UPDATE_DATA', payload: {joke: jokesData[getRandomInt(jokesData.length)], failed: true }});
           }
         }
       }
